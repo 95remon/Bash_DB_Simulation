@@ -54,7 +54,7 @@ while true; do
         ;;
         "${MainMenuList[4]}")
             echo  -e "${MainMenuList[$Option-1]}"
-            exit 0
+            break
         ;;
         *)
             echo "${MainMenuList[$Option-1]}"
