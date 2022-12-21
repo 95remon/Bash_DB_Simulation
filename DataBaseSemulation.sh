@@ -57,7 +57,6 @@ while true; do
             break
         ;;
         *)
-            echo "${MainMenuList[$Option-1]}"
             echo "kindly select number again"
         ;;
     esac
