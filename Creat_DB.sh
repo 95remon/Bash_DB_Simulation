@@ -14,15 +14,32 @@ clear='\033[0m'
 
 #------------------------------
 
-# cd DBs
+
+echo
 echo -e -n "${yellow}Kindly Enter the Name of DataBase :${clear}"
 read DBname
 pattern='^[a-zA-Z_][a-zA-Z0-9_]*$'  
 
-if [[ $DBname =~ $pattern ]]; then
-    echo "matches"
+while [[ ! $DBname =~ $pattern ]]; 
+do
+    echo
+    echo -e -n "${red}Kindly Enter the Name of DataBase again :${clear}"
+    read DBname
+done
+
+cd DBs
+
+DBFolder=$(ls -d */ | grep "${DBname}")
+
+if [[ "$DBFolder" != *"${DBname}"* ]]; then
+    mkdir ${DBname}
+    echo
+    echo -e -n "${green}DataBase (${DBname}) Has been Created Successfully${clear}"
+    echo
+    cd ..
 else
-    echo "not matches"
+    echo
+    echo -e -n "${red}DataBase (${DBname}) Already Exists ${clear}"
+    echo
+    cd ..
 fi
-
-

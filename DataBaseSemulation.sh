@@ -18,9 +18,6 @@ clear='\033[0m'
 echo
 echo -e "${cyan}Weclome${clear} ${red}${USER}${clear} ${cyan}To DataBase Semulation Project${clear} " 
 echo
-echo
-echo -e "${red}Main Menu :${clear}" 
-
 
 
 DBsFolder=$(ls -d */ | grep "DBs")
@@ -31,15 +28,24 @@ fi
 
 MainMenuList=("Create DB" "List DB" "Connect DB" "Drop DB" "Exit")
 
-for ((i=0;i<${#MainMenuList[@]};i++)); do 
-  string="${yellow}$(($i+1))) ${MainMenuList[$i]} ${clear}"
-  echo -e $string
-done
-echo
-while true; do
-  echo -e -n "${green}select Number #? >${clear} " 
-  read Option
-    case "${MainMenuList[$Option-1]}" in
+while true; 
+do
+    echo
+    echo -e "${magenta}Main Menu :${clear}" 
+    echo
+    for ((i=0;i<${#MainMenuList[@]};i++)); 
+    do 
+    string="${yellow}$(($i+1))) ${MainMenuList[$i]} ${clear}"
+    echo -e $string
+    done
+    echo
+    echo -e -n "${green}select Number #? >${clear} " 
+    read Option
+
+    pattern='^[0-9]$'  
+
+    if [[ $Option =~ $pattern ]]; then
+        case "${MainMenuList[$Option-1]}" in
         "${MainMenuList[0]}")
             source Creat_DB.sh
         ;;
@@ -48,17 +54,30 @@ while true; do
         ;;
         "${MainMenuList[2]}")
             source Connect_DB.sh
+            break
         ;;
         "${MainMenuList[3]}")
             source Drop_DB.sh
         ;;
         "${MainMenuList[4]}")
-            echo  -e "${MainMenuList[$Option-1]}"
+            echo
+            echo  -e "${magenta}Good Bye ^^${clear}"
+            echo
             break
         ;;
         *)
-            echo "kindly select number again"
+            echo
+            echo -e "${red}kindly select number again from 1 to 5${clear}"
+            echo
         ;;
-    esac
+        esac
+    else
+        echo
+        echo -e "${red}kindly Enter 1 Number only from 1 to 5${clear}"
+        echo
+        continue
+    fi
+
+    
 done
 
