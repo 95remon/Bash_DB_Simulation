@@ -9,6 +9,7 @@ do
 	       "Create Database") 
 		       ;;
 	       "List Databases") 
+	       . DB_list.sh
 		       ;;
 	       "Connect to Database") 
 		       ;;
