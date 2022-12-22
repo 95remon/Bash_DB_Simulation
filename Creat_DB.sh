@@ -41,7 +41,7 @@ do
         echo
         echo -e -n "${yellow}Kindly Enter Password for ${DBname} DataBase :${clear}"
         read DBpassword
-        pattern='^[0-9a-zA-Z!@#$%^&*()_+]{6,}$' 
+        pattern='^[0-9a-zA-Z!@#$%^&*()_+-]{6,}$' 
 
         while [[ ! $DBpassword =~ $pattern ]]; 
         do

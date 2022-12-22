@@ -15,6 +15,7 @@ clear='\033[0m'
 
 #------------------------------
 
+
 echo
 echo -e "${cyan}Weclome${clear} ${red}${USER}${clear} ${cyan}To DataBase Semulation Project${clear} " 
 echo
@@ -35,8 +36,8 @@ do
     echo
     for ((i=0;i<${#MainMenuList[@]};i++)); 
     do 
-    string="${yellow}$(($i+1))) ${MainMenuList[$i]} ${clear}"
-    echo -e $string
+        string="${yellow}$(($i+1))) ${MainMenuList[$i]} ${clear}"
+        echo -e $string
     done
     echo
     echo -e -n "${green}select Number #? >${clear} " 
@@ -50,7 +51,7 @@ do
             source Creat_DB.sh
         ;;
         "${MainMenuList[1]}")
-            List_DB
+            source List_DB.sh
         ;;
         "${MainMenuList[2]}")
             source Connect_DB.sh
@@ -80,4 +81,3 @@ do
 
     
 done
-
