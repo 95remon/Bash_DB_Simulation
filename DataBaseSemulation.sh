@@ -20,9 +20,9 @@ echo -e "${cyan}Weclome${clear} ${red}${USER}${clear} ${cyan}To DataBase Semulat
 echo
 
 
-DBsFolder=$(ls -d */ | grep "DBs")
+DBsFolder=$(ls -d */ 2>> Errors.txt  | grep -o "DBs/")
 
-if [[ "$DBsFolder" != *"DBs"* ]]; then
+if [[ "$DBsFolder" != "DBs/" ]]; then
   mkdir DBs
 fi
 

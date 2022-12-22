@@ -15,31 +15,67 @@ clear='\033[0m'
 #------------------------------
 
 
-echo
-echo -e -n "${yellow}Kindly Enter the Name of DataBase :${clear}"
-read DBname
-pattern='^[a-zA-Z_][a-zA-Z0-9_]*$'  
 
-while [[ ! $DBname =~ $pattern ]]; 
+while true; 
 do
+
     echo
-    echo -e -n "${red}Kindly Enter the Name of DataBase again :${clear}"
+    echo -e -n "${yellow}Kindly Enter the Name of DataBase :${clear}"
     read DBname
+    pattern='^[a-zA-Z_][a-zA-Z0-9_]*$'  
+
+    while [[ ! $DBname =~ $pattern ]]; 
+    do
+        echo
+        echo -e -n "${red}Kindly Enter the Name of DataBase again :${clear}"
+        read DBname
+
+    done
+
+    cd DBs
+    
+    DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
+
+    if [[ "$DBFolder" != "${DBname}/" ]]; then
+
+        echo
+        echo -e -n "${yellow}Kindly Enter Password for ${DBname} DataBase :${clear}"
+        read DBpassword
+        pattern='^[0-9a-zA-Z!@#$%^&*()_+]{6,}$' 
+
+        while [[ ! $DBpassword =~ $pattern ]]; 
+        do
+            echo
+            echo -e -n "${red}Kindly Enter the Password for ${DBname} DataBase again :${clear}"
+            read DBpassword
+            
+        done
+
+        EncryptedPassword=$(eval "echo ${DBpassword} | base64")
+        mkdir ${DBname}
+
+        DBmetaDataFile=$(ls -f 2>> Errors.txt  | grep -o ".DataBaseMetaData.txt")
+
+        if [[ "$DBmetaDataFile" != ".DataBaseMetaData.txt" ]]; then
+            touch .DataBaseMetaData.txt
+        fi
+        currDate=$(date)
+        newLine="${DBname};${EncryptedPassword};${USER};${currDate}"
+
+        echo ${newLine} >> .DataBaseMetaData.txt
+
+        echo
+        echo -e -n "${green}DataBase (${DBname}) Has been Created Successfully${clear}"
+        echo
+        cd ..
+        break
+    else
+        echo
+        echo -e -n "${red}DataBase (${DBname}) Already Exists ${clear}"
+        echo
+        cd ..
+        continue
+    fi
+
+    cd ..
 done
-
-cd DBs
-
-DBFolder=$(ls -d */ | grep "${DBname}")
-
-if [[ "$DBFolder" != *"${DBname}"* ]]; then
-    mkdir ${DBname}
-    echo
-    echo -e -n "${green}DataBase (${DBname}) Has been Created Successfully${clear}"
-    echo
-    cd ..
-else
-    echo
-    echo -e -n "${red}DataBase (${DBname}) Already Exists ${clear}"
-    echo
-    cd ..
-fi
