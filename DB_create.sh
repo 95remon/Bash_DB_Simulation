@@ -5,7 +5,6 @@ echo ""
 read DB_name
 #check if the DB exist befor creation
 . naming_check.sh $DB_name
-. DB_Exist.sh
 if [ $res = "valid" ] 
 then
         if [ $exist = "false" ]
