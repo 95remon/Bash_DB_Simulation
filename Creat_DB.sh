@@ -15,7 +15,7 @@ clear='\033[0m'
 #------------------------------
 
 
-
+clear
 while true; 
 do
 
@@ -27,6 +27,7 @@ do
     while [[ ! $DBname =~ $pattern ]]; 
     do
         echo
+        echo -e "${red}Name must matches this pattern ${green} ^[a-zA-Z_][a-zA-Z0-9_]*$ ${clear} ${clear} "
         echo -e -n "${red}Kindly Enter the Name of DataBase again :${clear}"
         read DBname
 
@@ -37,16 +38,18 @@ do
     DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
 
     if [[ "$DBFolder" != "${DBname}/" ]]; then
-
+        
         echo
-        echo -e -n "${yellow}Kindly Enter Password for ${DBname} DataBase :${clear}"
+        echo -e -n "${yellow}Kindly Enter Password for ${green}(${DBname})${clear} ${yellow}DataBase :${clear}"
         read DBpassword
         pattern='^[0-9a-zA-Z!@#$%^&*()_+-]{6,}$' 
 
         while [[ ! $DBpassword =~ $pattern ]]; 
         do
+            
             echo
-            echo -e -n "${red}Kindly Enter the Password for ${DBname} DataBase again :${clear}"
+            echo -e "${red}Password must matches this pattern${clear} ${green} ^[0-9a-zA-Z!@#$%^&*()_+-]{6,}$ ${clear} ${clear} "
+            echo -e -n "${red}Kindly Enter the Password for ${green}(${DBname})${clear} DataBase again :${clear}"
             read DBpassword
             
         done

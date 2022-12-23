@@ -15,6 +15,7 @@ clear='\033[0m'
 
 #------------------------------
 
+clear
 cd DBs
 
 DataBasesNames=($(ls -d */ 2>> Errors.txt))

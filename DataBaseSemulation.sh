@@ -15,7 +15,7 @@ clear='\033[0m'
 
 #------------------------------
 
-
+clear
 echo
 echo -e "${cyan}Weclome${clear} ${red}${USER}${clear} ${cyan}To DataBase Semulation Project${clear} " 
 echo
