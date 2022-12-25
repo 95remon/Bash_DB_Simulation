@@ -48,14 +48,15 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
     touch ${TableName}.tb
     touch .${TableName}.md
 
+
     for (( i = 1; i <= $NumOfColumns; i++ )) 
     do
-
-
 
         echo
         echo -e -n "${green}Kindly Enter the Name of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
         read ColName
+
+        
 
         pattern='^[a-zA-Z_][a-zA-Z0-9_]*$'   
 
@@ -66,11 +67,7 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
             echo -e -n "${red}Kindly Enter the Name of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
             read ColName
         done
-
-
-
-
-
+        
         echo
         echo -e -n "${green}Kindly Enter the Type( ${clear}${blue}int${clear} / ${blue}string${clear}${green} ) of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
         read ColType
@@ -84,9 +81,16 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
             echo -e -n "${red}Kindly Enter the Type of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
             read ColType
         done
+        ColumnsArray[i]=$ColName
 
 
-        echo " $i , $ColName , $ColType"
+        echo "$i , $ColName , $ColType"
+        
+        awk -F; '
+            
+        
+        
+        ' .${TableName}.md
         
     done
 
