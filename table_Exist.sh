@@ -10,7 +10,3 @@ then
         exist="false"
     fi
 fi
-
-
-
-

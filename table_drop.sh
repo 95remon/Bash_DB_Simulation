@@ -4,7 +4,7 @@ export LC_COLLATE=C
 
 DB_dir=$1
 echo ""
-echo "enter table name : "
+echo "enter  table name : "
 echo ""
 read table_name
 . /table_Exist.sh $table_name
