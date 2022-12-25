@@ -63,6 +63,7 @@ if [[ "$DBFolder" == "${DBname}/" ]]; then
                 fi
                 currDateTimeZone=$(date "+%F-%T-%Z")
                 mv ${DBname} .DeletedDBs/${DBname}${currDateTimeZone}
+                sleep 1
                 echo
                 echo -e -n "${green}Date Base${clear} ${red}${DBname}${clear} ${green}has been${clear} ${red}Deleted${clear} ${green}uccessfully${clear}" 
                 echo
