@@ -84,13 +84,37 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
         ColumnsArray[i]=$ColName
 
 
-        echo "$i , $ColName , $ColType"
+        if [[ $i == 1 ]]; then
+            echo "$ColName;$ColType" >> .${TableName}.md
+        else
+            bool=`awk -F ";" '
+            BEGIN{
+                flag=1
+            }
+            {
+                if( $1 == "'$ColName'" ) {
+                    flag=0
+                }
+                
+            }
+            END{
+                print flag
+            }
+            ' .${TableName}.md`
+
+            if [[ $bool != 0 ]]; then
+                echo "$ColName;$ColType" >> .${TableName}.md
+            else
+                echo
+                echo -e "${red}You used this name before ${clear}"
+                echo 
+                i=$i-1
+                continue
+            fi
+
+        fi
         
-        awk -F; '
-            
         
-        
-        ' .${TableName}.md
         
     done
 
