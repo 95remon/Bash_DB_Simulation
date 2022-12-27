@@ -100,7 +100,7 @@ do
             source Drop_Table.sh
         ;;
         "${DataBaseMenuList[3]}")
-            source Insert_In_Table.sh
+            source ../../Insert_In_Table.sh
         ;;
         "${DataBaseMenuList[4]}")
             source Select_All.sh
