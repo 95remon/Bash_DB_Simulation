@@ -32,7 +32,7 @@ done
 
 cd DBs
 
-DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
+DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "^${DBname}/$")
 
 if [[ "$DBFolder" == "${DBname}/" ]]; then
     echo -e "${red}Are you sure you want to Delete${clear} ${green}(${DBname})${clear} ${red}?${clear} "
@@ -57,7 +57,7 @@ if [[ "$DBFolder" == "${DBname}/" ]]; then
         if [[ $Option =~ $pattern ]]; then
             case "${YesNoList[$Option-1]}" in
             "${YesNoList[0]}")
-                DBsDeletedFolder=$(ls -a | grep -o ".DeletedDBs")
+                DBsDeletedFolder=$(ls -a 2>> Errors.txt | grep -o "^.DeletedDBs$")
                 if [[ "$DBsDeletedFolder" != ".DeletedDBs" ]]; then
                     mkdir .DeletedDBs
                 fi

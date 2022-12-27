@@ -27,5 +27,3 @@ do
 done
 
 cd ..
-
-DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")

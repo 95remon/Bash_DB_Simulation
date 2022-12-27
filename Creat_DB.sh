@@ -35,7 +35,7 @@ do
 
     cd DBs
     
-    DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
+    DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "^${DBname}/$")
 
     if [[ "$DBFolder" != "${DBname}/" ]]; then
         
@@ -57,7 +57,7 @@ do
         EncryptedPassword=$(eval "echo ${DBpassword} | base64")
         mkdir ${DBname}
 
-        DBmetaDataFile=$(ls -f 2>> Errors.txt  | grep -o ".DataBaseMetaData.txt")
+        DBmetaDataFile=$(ls -a 2>> Errors.txt  | grep -o "^.DataBaseMetaData.txt$")
 
         if [[ "$DBmetaDataFile" != ".DataBaseMetaData.txt" ]]; then
             touch .DataBaseMetaData.txt

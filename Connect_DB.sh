@@ -32,7 +32,7 @@ done
 
 cd DBs
 
-DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
+DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "^${DBname}/$")
 
 
 
@@ -57,7 +57,7 @@ do
 
     cd DBs
 
-    DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "${DBname}/")
+    DBFolder=$(ls -d */ 2>> Errors.txt | grep -o "^${DBname}/$")
 
 
 

@@ -27,7 +27,7 @@ do
     read TableName
 done
 
-TableFile=$(ls *.td 2>> Errors.txt | grep -o "${TableName}/")
+TableFile=$(ls 2>> Errors.txt | grep -o "^${TableName}.td$")
 
 if [[ "$TableFile" != "${TableName}.td" ]]; then
     
@@ -45,7 +45,7 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
         read NumOfColumns
     done
 
-    touch ${TableName}.tb
+    touch ${TableName}.td
     touch .${TableName}.md
 
 
@@ -117,6 +117,10 @@ if [[ "$TableFile" != "${TableName}.td" ]]; then
         
         
     done
+
+    echo
+    echo -e "${blue}Table ${clear}${magenta}${TableName}${clear}${blue} has been created${clear} "
+    echo
 
 else
     echo
