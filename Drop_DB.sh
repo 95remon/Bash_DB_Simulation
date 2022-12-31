@@ -70,7 +70,8 @@ if [[ "$DBFolder" == "${DBname}/" ]]; then
                 break
             ;;
             "${YesNoList[1]}")
-                source List_DB.sh
+                cd ..
+                break
             ;;
             *)
                 echo

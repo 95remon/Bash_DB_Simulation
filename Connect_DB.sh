@@ -97,7 +97,7 @@ do
             source ../../Create_Table.sh
         ;;
         "${DataBaseMenuList[2]}")
-            source Drop_Table.sh
+            source ../../Drop_Table.sh
         ;;
         "${DataBaseMenuList[3]}")
             source ../../Insert_In_Table.sh
