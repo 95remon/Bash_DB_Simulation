@@ -91,7 +91,7 @@ do
     if [[ $Option =~ $pattern ]]; then
         case "${DataBaseMenuList[$Option-1]}" in
         "${DataBaseMenuList[0]}")
-            source List_Tables.sh
+            source ../../List_Tables.sh
         ;;
         "${DataBaseMenuList[1]}")
             source ../../Create_Table.sh
