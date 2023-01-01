@@ -112,7 +112,7 @@ do
             source Delete_From_Table.sh
         ;;
         "${DataBaseMenuList[7]}")
-            source Update_Table.sh
+            source ../../Update_Table.sh
         ;;
         "${DataBaseMenuList[8]}")
             cd ../..
