@@ -92,8 +92,19 @@ else
             echo -e -n "${red}Kindly Enter the Name of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
             read ColName
         done
+        
+        flag=0
+        for (( i=0 ; i<${#ColumnsName[@]} ; i++ )); 
+        do
+            if [[ ${ColumnsName[$i]} == ${ColName} ]]; then
+                flag=1
+                break
+            fi
+        done
 
-        if [[  " ${ColumnsName[@]} " =~ " ${ColName} " ]]; then
+        
+
+        if (( ${flag}==1 )); then
             columns[$i-1]=${ColName}
         else
             echo
@@ -111,33 +122,29 @@ else
     do
         element=${columns[$i]}
         index=-1
-        for j in "${!columns[@]}";
+        for ((j=0 ; j<=${#columns[@]} ; j++));
         do
             
             if [[ "${ColumnsName[$j]}" == "${element}" ]];
             then
                 ((index=$j+1))
+                indexes[$i]=$index
                 
-                break
             fi
         done
-        indexes[$i]=$index
+        
     done
 
 
     echo ${indexes[@]}
-
-    for (( i=0 ; i<${#indexes[@]} ; i++ ));
+    string="${indexes[0]}"
+    for (( i=1; i<${#indexes[@]} ; i++ ));
     do
-        awk -F ";" '{
-            i="'${indexes[i]}'"
-
-            print $i
-            
-            
-
-        }' ${TableName}.td >> tmp 2>> Errors.txt 
+            string=$string","${indexes[i]}    
+        
     done
+
+    cut -d ";" -f${string} ${TableName}.td
     
 
 
