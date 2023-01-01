@@ -117,7 +117,7 @@ else
                     fi
                 else
                     echo
-                    echo -e -n "${red}The Data is int and shoud matches this pattern ${clear}${green}[0-9a-zA-Z#@_.%$ ]+${clear}"
+                    echo -e -n "${red}The Data is string and shoud matches this pattern ${clear}${green}[0-9a-zA-Z#@_.%$ ]+${clear}"
                     i=$i-1
                     continue
                 fi

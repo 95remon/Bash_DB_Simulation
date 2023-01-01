@@ -109,29 +109,106 @@ else
             echo
             echo -e -n "${blue}Enter the (${green}${ColumnNeededUpdate}${clear}${blue}) value as (${clear}${red} ${DataTypeOfColumn} ${clear})${blue}: ${clear}"
             read ColumnData
+            if [[ $index == 0 ]]; then
+                if [[ ${DataTypeOfColumn} == "int" ]]; then
+                    if [[ $ColumnData =~ $intPattern ]]; then
+                        isRepeated=`awk -F ";" '
+                                    BEGIN{
+                                        flag=1
+                                    }
+                                    {
+                                        if( $1 == "'${ColumnData}'" ) {
+                                            flag=0
+                                        }
+                                        
+                                    }
+                                    END{
+                                        print flag
+                                    }
+                                    ' ${TableName}.td`
 
-            stringPattern="^[0-9a-zA-Z#@_.%$ ]+$"
-            intPattern="^[-]{0,1}[0-9]+$"
 
-            if [[ ${DataTypeOfColumn} == "int" ]]; then
-                if [[ $ColumnData =~ $intPattern ]]; then
-                    ColumnNewValue=$ColumnData
-                    j=$j+1
-                else
-                    echo
-                    echo -e "${red}Value must matches this pattern ${green} ^[-]{0,1}[0-9]+$ ${clear} "
-                    continue
+                        if [[ $isRepeated != 0 ]]; then
+                            ColumnNewValue=$ColumnData
+                            j=$j+1
+                        else
+                            echo
+                            echo -e -n "${red}This record has been entered before (first column is PK)${clear}"
+                            
+                            continue
+                        fi
+                    else
+                        echo
+                        echo -e -n "${red}The Data is int and shoud matches this pattern ${clear}${green}^[-]{0,1}[0-9]+${clear}"
+                        
+                        continue
+                    fi
+                elif [[ ${DataTypeOfColumn} == "string" ]]; then
+                    if [[ $ColumnData =~ $stringPattern ]]; then
+                        isRepeated=`awk -F ";" '
+                                    BEGIN{
+                                        flag=1
+                                    }
+                                    {
+                                        if( $1 == "'${ColumnData}'" ) {
+                                            flag=0
+                                        }
+                                        
+                                    }
+                                    END{
+                                        print flag
+                                    }
+                                    ' ${TableName}.td`
+
+
+                        if [[ $isRepeated != 0 ]]; then
+                            ColumnNewValue=$ColumnData
+                            j=$j+1
+                        else
+                            echo
+                            echo -e -n "${red}This record has been entered before (first column is PK)${clear}"
+                            
+                            continue
+                        fi
+                    else
+                        echo
+                        echo -e -n "${red}The Data is string and shoud matches this pattern ${clear}${green}[0-9a-zA-Z#@_.%$ ]+${clear}"
+                        
+                        continue
+                    fi
                 fi
-            elif [[ ${DataTypeOfColumn} == "string" ]]; then
-                if [[ $ColumnData =~ $stringPattern ]]; then
-                    ColumnNewValue=$ColumnData
-                    j=$j+1
-                else
-                    echo
-                    echo -e -n "${red}The Data is int and shoud matches this pattern ${clear}${green}^[0-9a-zA-Z#@_.%$ ]+$ ${clear}"
-                    continue
-                fi
-            fi     
+                
+            else
+                
+
+                stringPattern="^[0-9a-zA-Z#@_.%$ ]+$"
+                intPattern="^[-]{0,1}[0-9]+$"
+
+                if [[ ${DataTypeOfColumn} == "int" ]]; then
+                    if [[ $ColumnData =~ $intPattern ]]; then
+                        ColumnNewValue=$ColumnData
+                        j=$j+1
+                    else
+                        echo
+                        echo -e "${red}Value must matches this pattern ${green} ^[-]{0,1}[0-9]+$ ${clear} "
+                        continue
+                    fi
+                elif [[ ${DataTypeOfColumn} == "string" ]]; then
+                    if [[ $ColumnData =~ $stringPattern ]]; then
+                        ColumnNewValue=$ColumnData
+                        j=$j+1
+                    else
+                        echo
+                        echo -e -n "${red}The Data is int and shoud matches this pattern ${clear}${green}^[0-9a-zA-Z#@_.%$ ]+$ ${clear}"
+                        continue
+                    fi
+                fi         
+            fi
+
+
+
+
+                 
 
         elif ((j==2)); then
 
@@ -208,39 +285,7 @@ else
 
     echo " ${ColumnNeededUpdate} ${ColumnNewValue} ${WhereColumn} ${WhereValue} "
 
-    # echo
-    # echo -e -n "${green}Write the column needed to update >${clear} " 
-    # read ColumnNeededUpdate
-
-    # pattern='^[a-zA-Z_][a-zA-Z0-9_]*$'   
-
-    # while [[ ! $ColumnNeededUpdate =~ $pattern ]]; 
-    # do
-    #     echo
-    #     echo -e "${red}Name must matches this pattern ${green} ^[a-zA-Z_][a-zA-Z0-9_]*$ ${clear} ${clear} "
-    #     echo -e -n "${red}Kindly Enter the Name of Column ${clear}${magenta}#${i}${clear} ${green}:${clear}"
-    #     read ColName
-    # done
-
-
-
-    # echo
-    # echo -e -n "${green}Write the New value >${clear} " 
-    # read NewValue
-
-    # echo
-    # echo -e -n "${green}Write the (WHERE) column >${clear} " 
-    # read WhereColumn
-
-    # echo
-    # echo -e -n "${green}Write the (WHERE) column value>${clear} " 
-    # read WhereValue
-
-
-
-   
-
-
+    
 
 
 fi
