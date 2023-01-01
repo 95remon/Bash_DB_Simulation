@@ -1,1 +1,11 @@
 rm: cannot remove 'tmp': No such file or directory
+awk: run time error: negative field index $-1
+	FILENAME="students.td" FNR=1 NR=1
+awk: run time error: negative field index $-1
+	FILENAME="students.td" FNR=1 NR=1
+awk: run time error: negative field index $-1
+	FILENAME="students.td" FNR=1 NR=1
+awk: run time error: negative field index $-1
+	FILENAME="students.td" FNR=1 NR=1
+rm: cannot remove 'tmp': No such file or directory
+rm: cannot remove 'tmp': No such file or directory

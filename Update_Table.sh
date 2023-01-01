@@ -82,13 +82,27 @@ else
                 read cnu
             done
 
-            if [[  "${ColumnsName[*]}" =~ "${cnu}" ]]; then
+
+            flag=0
+            for (( i=0 ; i<${#ColumnsName[@]} ; i++ )); 
+            do
+                if [[ ${ColumnsName[$i]} == ${cnu} ]]; then
+                    flag=1
+                    break
+                fi
+            done
+
+            
+
+            if (( ${flag}==1 )); then
                 ColumnNeededUpdate=$cnu
                 j=$j+1
             else
                 echo
                 echo -e "${red} You have entered wrong column Name, Try again${clear} "
                 continue
+                
+                
             fi
             
 
@@ -227,7 +241,20 @@ else
                 read whc
             done
 
-            if [[  "${ColumnsName[*]}" =~ "${whc}" ]]; then
+
+            
+            flag=0
+            for (( i=0 ; i<${#ColumnsName[@]} ; i++ )); 
+            do
+                if [[ ${ColumnsName[$i]} == ${whc} ]]; then
+                    flag=1
+                    break
+                fi
+            done
+
+            
+
+            if (( ${flag}==1 )); then
                 WhereColumn=$whc
                 j=$j+1
             else

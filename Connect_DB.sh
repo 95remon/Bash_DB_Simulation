@@ -106,7 +106,7 @@ do
             source ../../Select_All.sh
         ;;
         "${DataBaseMenuList[5]}")
-            source Select_From_Table.sh
+            source ../../Select_From_Table.sh
         ;;
         "${DataBaseMenuList[6]}")
             source Delete_From_Table.sh
