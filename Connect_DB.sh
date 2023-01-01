@@ -103,7 +103,7 @@ do
             source ../../Insert_In_Table.sh
         ;;
         "${DataBaseMenuList[4]}")
-            source Select_All.sh
+            source ../../Select_All.sh
         ;;
         "${DataBaseMenuList[5]}")
             source Select_From_Table.sh
