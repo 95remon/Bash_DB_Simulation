@@ -283,9 +283,76 @@ else
 
 
 
-    echo " ${ColumnNeededUpdate} ${ColumnNewValue} ${WhereColumn} ${WhereValue} "
+    # echo " ${ColumnNeededUpdate} ${ColumnNewValue} ${WhereColumn} ${WhereValue} "
+    
+
+
 
     
+    indexOfColumnNeededUpdate=-1
+    
+    for i in "${!ColumnsName[@]}";
+    do
+        if [[ "${ColumnsName[$i]}" == "${ColumnNeededUpdate}" ]];
+        then
+            ((indexOfColumnNeededUpdate=$i+1))
+            break
+        fi
+    done
+
+
+
+    
+    indexOfWhereColumn=-1
+    
+    for i in "${!ColumnsName[@]}";
+    do
+        if [[ "${ColumnsName[$i]}" == "${WhereColumn}" ]];
+        then
+            ((indexOfWhereColumn=$i+1))
+            break
+        fi
+    done
+
+    # echo " ${indexOfColumnNeededUpdate} ${indexOfWhereColumn} "
+
+    awk -F ";" '{
+        awkindexOfColumnNeededUpdate="'${indexOfColumnNeededUpdate}'"
+        awkindexOfWhereColumn="'${indexOfWhereColumn}'"
+        awkColumnNewValue="'${ColumnNewValue}'"
+
+
+
+        if ( $awkindexOfWhereColumn == "'${WhereValue}'"){
+            for (i=1 ; i<=NF ; i++){
+            if(i != NF){
+                if (i == awkindexOfColumnNeededUpdate ){
+                    printf "%s;", awkColumnNewValue
+                }else{
+                    printf "%s;", $i
+                }
+
+            }else{
+                if (i == awkindexOfColumnNeededUpdate ){
+                    printf "%s\n", awkColumnNewValue
+                }else{
+                    printf "%s\n", $i
+                }  
+            }
+        }
+        }else{
+            print $0
+        }
+
+    }' ${TableName}.td > tmp 2>> Errors.txt
+
+    mv tmp ${TableName}.td 2>> Errors.txt
+
+    rm tmp 2>> Errors.txt
+
+    echo
+    echo -e -n "${green}The Record Updated${clear}"
+    echo
 
 
 fi
